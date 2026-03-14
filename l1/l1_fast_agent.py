@@ -44,7 +44,13 @@ Rules:
 """
 
 agent = create_agent(
-    model=ChatOllama(model="llama3.1:8b", temperature=0),
+    model= ChatOllama(
+    model="qwen3.5:9b",
+    temperature=0,
+    num_ctx=8192,
+    num_predict=-1,
+    reasoning=False, #Needed this to output the full text, as the <thinking> tokens stopped the final ouput to be full printed in the notebook
+),
     tools=[execute_sql],
     system_prompt=SYSTEM_PROMPT,
     context_schema=RuntimeContext,
